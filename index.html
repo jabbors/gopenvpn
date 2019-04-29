@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OpenVPN app</title>
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        {{if .Refresh}}
+        <meta http-equiv="refresh" content="2" />
+        {{end}}
+    </head>
+    <body>
+        <div id="state">{{.State}}</div>
+        {{if .Servers}}
+        <form method="get" action="/start">
+            <select name="config">
+                {{range $server := .Servers}}
+                <option value="{{$server.Config}}">{{$server.Name}}</option>
+                {{end}}
+            </select>
+            <button type="submit">Connect</button>
+        </form>
+        {{else}}
+        <form method="get" action="/stop">
+            <button type="submit">Disconnect</button>
+        </form>
+        {{end}}
+    </body>
+</html>
