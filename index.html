@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>OpenVPN app</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
@@ -10,20 +12,30 @@
         {{end}}
     </head>
     <body>
-        <div id="state">{{.State}}</div>
-        {{if .Servers}}
-        <form method="get" action="/start">
-            <select name="config">
-                {{range $server := .Servers}}
-                <option value="{{$server.Config}}">{{$server.Name}}</option>
-                {{end}}
-            </select>
-            <button type="submit">Connect</button>
-        </form>
-        {{else}}
-        <form method="get" action="/stop">
-            <button type="submit">Disconnect</button>
-        </form>
-        {{end}}
+        <div class="container">
+            <div class="row">
+                <div class="six columns">
+                    <div id="state">State: {{.State}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="six columns">
+                    {{if .Servers}}
+                    <form method="get" action="/start">
+                        <select name="config">
+                            {{range $server := .Servers}}
+                            <option value="{{$server.Config}}">{{$server.Name}}</option>
+                            {{end}}
+                        </select>
+                        <button type="submit" class="button-primary">Connect</button>
+                    </form>
+                    {{else}}
+                    <form method="get" action="/stop">
+                        <button type="submit" class="button-primary">Disconnect</button>
+                    </form>
+                    {{end}}
+                </div>
+            </div>
+        </div>
     </body>
 </html>
