@@ -30,9 +30,13 @@
                         <button type="submit" class="button-primary">Connect</button>
                     </form>
                     {{else}}
+                        {{if eq .State "Disconnected"}}
+                    <span>No configs found, add one <a href="/configs/add">here</a></span>
+                        {{else}}
                     <form method="get" action="/stop">
                         <button type="submit" class="button-primary">Disconnect</button>
                     </form>
+                        {{end}}
                     {{end}}
                 </div>
             </div>
