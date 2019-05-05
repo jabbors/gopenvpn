@@ -174,7 +174,7 @@ func main() {
 	var configDir string
 	flag.StringVar(&host, "host", "127.0.0.1", "Host to bind to")
 	flag.IntVar(&port, "port", 8080, "Port to bind to")
-	flag.StringVar(&configDir, "config-dir", "/etc/openopvn", "Directoy with configurations")
+	flag.StringVar(&configDir, "config-dir", "/etc/openvpn", "Directoy with configurations")
 	flag.Parse()
 
 	state := make(chan vpnState, 1)
