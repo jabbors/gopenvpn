@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -14,7 +15,6 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/alecthomas/template"
 	"github.com/go-chi/chi"
 )
 
