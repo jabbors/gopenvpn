@@ -177,6 +177,9 @@ func main() {
 	flag.StringVar(&configDir, "config-dir", "/etc/openvpn", "Directoy with configurations")
 	flag.Parse()
 
+	// read template or panic
+	tmpl := template.Must(template.ParseFiles("./index.html"))
+
 	state := make(chan vpnState, 1)
 	done := make(chan error, 1)
 
@@ -215,22 +218,16 @@ func main() {
 	})
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.String())
-		tmpl, err := template.ParseFiles("./index.html")
-		if err != nil {
-			log.Println("unable to read index file:", err)
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte("internal server error"))
-			return
-		}
 		var servers []vpnServer
 		if status == Disconnected {
-			servers, err = serverConfigs(configDir)
+			s, err := serverConfigs(configDir)
 			if err != nil {
 				log.Println("unable to get server configs:", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("internal server error"))
 				return
 			}
+			servers = s
 		}
 		data := htmlPage{Refresh: status.Refresh(), State: status.String(), Servers: servers}
 		tmpl.Execute(w, data)
