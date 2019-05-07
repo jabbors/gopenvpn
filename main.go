@@ -172,7 +172,7 @@ func main() {
 	var host string
 	var port int
 	var configDir string
-	flag.StringVar(&host, "host", "127.0.0.1", "Host to bind to")
+	flag.StringVar(&host, "host", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&port, "port", 8080, "Port to bind to")
 	flag.StringVar(&configDir, "config-dir", "/etc/openvpn", "Directoy with configurations")
 	flag.Parse()
