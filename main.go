@@ -255,10 +255,8 @@ func main() {
 				return
 			}
 			p = proc
-			http.Redirect(w, r, "/", 307)
-		} else {
-			w.WriteHeader(http.StatusNoContent)
 		}
+		http.Redirect(w, r, "/", 307)
 	})
 	r.Get("/stop", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.String())
@@ -275,10 +273,8 @@ func main() {
 			}
 			p = nil
 			status = Disconnected
-			http.Redirect(w, r, "/", 307)
-		} else {
-			w.WriteHeader(http.StatusNoContent)
 		}
+		http.Redirect(w, r, "/", 307)
 	})
 	r.Get("/reset", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.String())
