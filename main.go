@@ -274,6 +274,7 @@ func main() {
 				return
 			}
 			p = nil
+			status = Disconnected
 			http.Redirect(w, r, "/", 307)
 		} else {
 			w.WriteHeader(http.StatusNoContent)
