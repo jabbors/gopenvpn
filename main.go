@@ -197,7 +197,7 @@ func main() {
 	r := chi.NewRouter()
 
 	r.Get("/state", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("/state")
+		log.Println(r.URL.String())
 		w.Header().Set("Content-Type", "text/plain")
 		w.Write([]byte("VPN: "))
 		switch status {
@@ -214,7 +214,7 @@ func main() {
 		w.Write([]byte(fmt.Sprintf("%v\n", p)))
 	})
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("/")
+		log.Println(r.URL.String())
 		tmpl, err := template.ParseFiles("./index.html")
 		if err != nil {
 			log.Println("unable to read index file:", err)
@@ -267,7 +267,7 @@ func main() {
 			}
 			err := p.Stop()
 			if err != nil {
-				log.Println("unable to start process:", err)
+				log.Println("unable to stop process:", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				return
 			}
