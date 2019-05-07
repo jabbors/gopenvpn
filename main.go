@@ -202,19 +202,9 @@ func main() {
 	r.Get("/state", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.String())
 		w.Header().Set("Content-Type", "text/plain")
-		w.Write([]byte("VPN: "))
-		switch status {
-		case Disconnected:
-			w.Write([]byte("Disconnected\n"))
-		case Connecting:
-			w.Write([]byte("Connecting\n"))
-		case Active:
-			w.Write([]byte("Active\n"))
-		}
-		w.Write([]byte("Number of goroutines: "))
-		w.Write([]byte(fmt.Sprintf("%d\n", runtime.NumGoroutine())))
-		w.Write([]byte("Process: "))
-		w.Write([]byte(fmt.Sprintf("%v\n", p)))
+		w.Write([]byte(fmt.Sprintf("VPN: %s\n", status.String())))
+		w.Write([]byte(fmt.Sprintf("Number of goroutines: %d\n", runtime.NumGoroutine())))
+		w.Write([]byte(fmt.Sprintf("Process: %v\n", p)))
 	})
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		log.Println(r.URL.String())
