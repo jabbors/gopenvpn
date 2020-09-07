@@ -172,13 +172,16 @@ func main() {
 	var host string
 	var port int
 	var configDir string
+	var dataDir string
 	flag.StringVar(&host, "host", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&port, "port", 8080, "Port to bind to")
 	flag.StringVar(&configDir, "config-dir", "/etc/openvpn", "Directoy with configurations")
+	flag.StringVar(&dataDir, "data-dir", "/usr/share/openvpn", "Directory for templates")
 	flag.Parse()
 
 	// read template or panic
-	tmpl := template.Must(template.ParseFiles("./index.html"))
+	indexFile := filepath.Join(dataDir, "index.html")
+	tmpl := template.Must(template.ParseFiles(indexFile))
 
 	state := make(chan vpnState, 1)
 	done := make(chan error, 1)
