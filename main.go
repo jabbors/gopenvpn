@@ -176,7 +176,7 @@ func main() {
 	flag.StringVar(&host, "host", "0.0.0.0", "Host to bind to")
 	flag.IntVar(&port, "port", 8080, "Port to bind to")
 	flag.StringVar(&configDir, "config-dir", "/etc/openvpn", "Directoy with configurations")
-	flag.StringVar(&dataDir, "data-dir", "/usr/share/openvpn", "Directory for templates")
+	flag.StringVar(&dataDir, "data-dir", "/usr/share/gopenvpn", "Directory for templates")
 	flag.Parse()
 
 	// read template or panic
